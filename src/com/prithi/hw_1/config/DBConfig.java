@@ -15,7 +15,7 @@ public class DBConfig {
     static final String USER = "root";
     static final String PASS = "121361";
 
-    public Connection dbConnect() throws ClassNotFoundException, SQLException {
+    public Connection initialize() throws ClassNotFoundException, SQLException {
         Connection conn = null;
         Class.forName("com.mysql.jdbc.Driver");
 

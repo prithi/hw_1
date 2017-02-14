@@ -5,12 +5,38 @@ package com.prithi.hw_1.domain;
  */
 public class EmployeePOJO {
 
-    public void setFirstName(String firstName){}
+    String firstName, lastName;
+    int id, age;
 
-    public void setLastName(String lastName){}
+    public void setFirstName(String firstName){
+    this.firstName = firstName;
+    }
 
-    public void setID(String id){}
+    public String getFirstName(){
+        return firstName;
+    }
 
-    public void setAge(String age){}
+    public void setLastName(String lastName){
+        this.lastName = lastName;
+    }
 
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setID(int id){
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setAge(int age){
+        this.age = age;
+    }
+
+    public int getAge() {
+        return age;
+    }
 }
