@@ -1,6 +1,7 @@
 package com.prithi.hw_1;
 
 import java.sql.*;
+import java.util.Scanner;
 
 public class Main {
 
@@ -12,6 +13,8 @@ public class Main {
 
 
     public static void main(String[] args) {
+
+        Scanner kb = new Scanner(System.in);
 
         Connection conn = null;
         Statement stmt = null;
@@ -38,8 +41,51 @@ public class Main {
             String sql;
             sql = "SELECT id, first, last, age FROM Employees";
 
+            System.out.println("Enter ID");
+            int id = kb.nextInt();
+
+
+            System.out.println("Enter First Name");
+            String first = kb.next();
+            first = "'"+first+"'";
+
+
+            System.out.println("Enter Lase Name");
+            String last = kb.next();
+            last = "'"+last+"'";
+
+            System.out.println("Enter Age");
+            int age = kb.nextInt();
+
+
+
+            String sqlInsert = "Insert into Employees " + "values (" + id + ", " + age + ", " + first + ", " + last + ")";
+            System.out.println("The SQL query is: " + sqlInsert);
+
+            int countInserted = stmt.executeUpdate(sqlInsert);
+
+            System.out.println(countInserted + " records inserted.\n");
+
             ResultSet rs = stmt.executeQuery(sql);
 
+            ResultSetMetaData resultSetMetaData = rs.getMetaData();
+            int numberOfColumns = resultSetMetaData.getColumnCount();
+
+            System.out.printf("Employees Database:%n%n");
+
+            for (int i=1; i<= numberOfColumns; i++){
+                System.out.printf("%-8s\t", resultSetMetaData.getColumnName(i));
+            }
+            System.out.println();
+
+            while (rs.next()){
+                for(int i=1; i<=numberOfColumns; i++){
+                    System.out.printf("%-8s\t", rs.getObject(i));
+                }
+                System.out.println();
+            }
+
+            /*
             while(rs.next()){
                 int id = rs.getInt("id");
                 int age = rs.getInt("age");
@@ -51,7 +97,7 @@ public class Main {
                 System.out.print(", First: " + first);
                 System.out.println(", Last: " + last);
 
-            }
+            }*/
             rs.close();
             stmt.close();
             conn.close();
